@@ -1,41 +1,39 @@
-import Perceptron from "./Perceptron.js";
+import DenseNet from "./class/DenseNet.js";
+import {shuffle} from "./utils/utils.js";
 
-function shuffle(array) {
-    return [...array].sort(() => Math.random() - 0.5);
-}
-
-const myPerceptron = new Perceptron(2)
-const dataset = [
-    [[20, 5], [-1]],
-    [[18, 25], [-1]],
-    [[24, 15], [-1]],
-    [[22, 25], [-1]],
-    [[21, 0], [-1]],
-    [[25, 15], [-1]],
-
-    [[5, 45], [1]],
-    [[9, 5], [1]],
-    [[12, 15], [1]],
-    [[7, 25], [1]],
-    [[8, 75], [1]],
-    [[15, 75], [1]],
+const datasetAND = [
+    [[1.0, 0.0], [0.0]],
+    [[0.0, 1.0], [0.0]],
+    [[1.0, 1.0], [1.0]],
+    [[0.0, 0.0], [0.0]],
 ]
 
-console.log('before training prediction')
-dataset.forEach(data => {
-    console.log(`For ${data[0]} expected : ${data[1][0]} | obtain : ${myPerceptron.predict(data[0])}`)
-})
-console.log(myPerceptron.weights)
+const net = new DenseNet(2, 4, 1)
 
-for(let i = 0; i<500; i++) {
-    const ds = shuffle(dataset)
-    ds.forEach(data => {
-        myPerceptron.train(data[0], data[1][0])
+datasetAND.forEach(d => {
+    console.log(`For ${d[0]} | expect ${d[1]} | get ${net.predict(d[0])}`)
+})
+
+console.log('Out weight')
+console.log(net.outputLayer.map(l => l.weights)[0])
+console.log('Hidden weight')
+console.log(net.hiddenLayer1.map(l => l.weights))
+
+console.log('________________________')
+for(let i=0; i<900; i++) {
+    const datasetANDshuffle = shuffle(datasetAND)
+    datasetANDshuffle.forEach(d => {
+        net.train(d[0], d[1], 0.01)
     })
 }
+console.log('---------TRAIN----------')
+console.log('________________________')
 
-console.log(myPerceptron.weights)
-console.log('after training prediction')
-dataset.forEach(data => {
-    console.log(`For ${data[0]} expected : ${data[1][0]} | obtain : ${myPerceptron.predict(data[0])}`)
+console.log('Out weight')
+console.log(net.outputLayer.map(l => l.weights)[0])
+console.log('Hidden weight')
+console.log(net.hiddenLayer1.map(l => l.weights))
+
+datasetAND.forEach(d => {
+    console.log(`For ${d[0]} | expect ${d[1]} | get ${net.predict(d[0])}`)
 })
