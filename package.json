@@ -1,0 +1,16 @@
+{
+  "name": "gobelins-workshop-ia",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "repository": "git@github.com:robinsimonklein/gobelins-workshop-ia.git",
+  "author": "Robin Simonklein <rsimonklein@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "private": true,
+  "dependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
