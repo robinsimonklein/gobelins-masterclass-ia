@@ -7,10 +7,14 @@
   "author": "Robin Simonklein <rsimonklein@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app.js"
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "private": true,
   "dependencies": {
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
   }
 }

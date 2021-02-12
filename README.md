@@ -1,14 +1,11 @@
 # gobelins-workshop-ia
 
-## Sans installer le projet
+## Installer le projet
 ```shell
-node app.js
+yarn install
 ```
 
-## En installant le projet
+## Lancer le projet
 ```shell
-npm install
-```
-```shell
-npm run start
+yarn dev
 ```
